@@ -8,14 +8,14 @@ A service, which consumes messages ( employee data in JSON serialized form)  fro
 - Spring boot
 
 ###Features
-- The service (Spring-boot app) reads messages from a topic "database-queue" ( can be configured) and it upserts to a "employee" database ( currently it contians only one table).
+- The service (Spring-boot app) reads messages from a topic "database-queue" ( can be configured) and it upserts to a "employee" database ( currently it contains only one table).
 - If the update fails, the data will published to a error topic "database_error_queue" ( can be configured).
 - A startup script ('bin/start.sh') will starts the Kafka cluster ( 3 node), ZooKeeper and also creates the topics.
-- A REST endpoint ("v1/data/publish') is expossed for publish a message (employee data in JSON form) to kafka topic ( this end-point is ONLY FOR TESTING).
+- A REST endpoint ("v1/data/publish') is exposed for publish a message (employee data in JSON form) to kafka topic ( this end-point is ONLY FOR TESTING).
 
 
 ### Start the app and test
-- start infrastructure ( kafka and ZooKeeper), `./bin/start,sh`
+- start infrastructure ( kafka and ZooKeeper), `./start,sh`
 - start application, `mvn clean spring-boot:run`
 - Test (Publuish a mesasage) using REST endpoint
 ```javascript
@@ -32,7 +32,12 @@ curl -X POST \
 cd /bin/kafka_2.12-2.1.0
 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic database-queue
 ```
-
+- Verify in Sqlite Database
+```javascript
+cd bin/sqllite/
+sqlite3 ../../employee.db
+SELECT * FROM employee;
+```
 
 ### TODOs
 
