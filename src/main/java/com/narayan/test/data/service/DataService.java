@@ -21,7 +21,7 @@ import com.narayan.test.model.Employee;
  *
  */
 @RestController
-@RequestMapping("v1/data")
+@RequestMapping("v1/queue")
 public class DataService {
 
 	private static Logger logger = LoggerFactory.getLogger(DataService.class);
@@ -39,7 +39,7 @@ public class DataService {
 	 * @return
 	 */
 	@PostMapping
-	@RequestMapping("/publish")
+	@RequestMapping("/employees")
 	public ResponseEntity<String> publishMessage(@RequestBody Employee emp) {
 
 		try {

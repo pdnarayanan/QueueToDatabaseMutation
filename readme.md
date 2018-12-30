@@ -20,7 +20,7 @@ A service, which consumes messages ( employee data in JSON serialized form)  fro
 - Test (Publuish a mesasage) using REST endpoint
 ```javascript
 curl -X POST \
-  http://localhost:8080/v1/data/publish \
+  http://localhost:8080/v1/queue/employees \
   -H 'accept: application/json' \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
@@ -41,5 +41,6 @@ SELECT * FROM employee;
 
 ### TODOs
 
-- Dockerize the applcaiton. 
-- Externalize the Database configuration.
+- Containerize the application using Docker 
+- Externalize the Database configuration to support different database.
+- Use JPA repository for DOA 

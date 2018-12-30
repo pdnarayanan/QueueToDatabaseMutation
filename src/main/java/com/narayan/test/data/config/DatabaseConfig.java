@@ -29,7 +29,7 @@ public class DatabaseConfig {
         dataSourceBuilder.driverClassName("org.sqlite.JDBC");
         dataSourceBuilder.url("jdbc:sqlite:employee.db");
         DataSource dataSource = dataSourceBuilder.build();
-        dataSource.getConnection().setAutoCommit(true);
+      
         return dataSource;  
 	}
 	

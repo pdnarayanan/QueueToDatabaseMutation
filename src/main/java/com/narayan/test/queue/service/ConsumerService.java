@@ -55,7 +55,7 @@ public class ConsumerService extends ShutdownableThread {
 			Employee employee = null;
 
 			try {
-				logger.info("\nValue:" + value + "\n");
+				logger.info("Message consumed:" + value );
 				employee = mapper.readValue(value, Employee.class);
 				employeeDAO.saveOrUpdate(employee);
 		

@@ -18,13 +18,13 @@ import com.narayan.test.model.Employee;
  * 
  * Implementation for {@link EmployeeDAO}
  * 
- * @author  Narayanan Durgadathan
+ * @author Narayanan Durgadathan
  *
  */
 @Component
 public class EmployeeDAOImpl implements EmployeeDAO {
 	private static Logger logger = LoggerFactory.getLogger(EmployeeDAOImpl.class);
-	
+
 	private static final String GET_QUERY = "SELECT id, first_name, last_name, address1, address2, city, state, zip, email "
 			+ "FROM employee WHERE id=?";
 
@@ -39,6 +39,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		Connection conn = null;
 		try {
 			conn = dataSource.getConnection();
+			conn.setAutoCommit(false);
 			PreparedStatement ps = conn.prepareStatement(MUTATE_QUERY);
 			ps.setString(1, employee.getId() == null ? null : employee.getId().toString());
 			ps.setString(2, employee.getFirstName());
@@ -53,24 +54,26 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 			ps.close();
 		} catch (Exception e) {
-			logger.error("DataBase Isertion failed...", e);
+			logger.error("DataBase update failed...", e);
 			if (conn != null) {
 				try {
 					conn.rollback();
 					conn.close();
 				} catch (SQLException ee) {
-					// no-op
+					// Not expecting this exception
+					logger.error("DB Update error", ee);
 				}
 			}
 
-			throw new RuntimeException(e);
+			throw new DAOException(e.getMessage(), e);
 		} finally {
 			if (conn != null) {
 				try {
 					conn.commit();
 					conn.close();
 				} catch (SQLException e) {
-					// no-op
+					// Not expecting this exception
+					logger.error("DB Update error", e);
 				}
 			}
 		}
@@ -102,8 +105,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			ps.close();
 			return employee;
 		} catch (Exception e) {
-			// TODO logging
-			throw new RuntimeException(e);
+			logger.error("Exception while querry the databse", e);
+			throw new DAOException(e.getMessage(), e);
 		} finally {
 			closeConnection(conn);
 
@@ -116,7 +119,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				// No-op
+				// Not expecting this exception
+				logger.error("DB Update error", e);
 			}
 		}
 	}
