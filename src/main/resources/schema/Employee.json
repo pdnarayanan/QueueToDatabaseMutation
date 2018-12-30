@@ -1,0 +1,43 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Person",
+	"type": "object",
+	"properties": {
+		"id": {
+			"type": "integer",
+			"description": " The id "
+		},
+		"firstName": {
+			"type": "string",
+			"description": "The employee's first name."
+		},
+		"lastName": {
+			"type": "string",
+			"description": "The employee's last name."
+		},
+		"address1": {
+			"type": "string",
+			"description": "The address 1"
+		},
+		"address2": {
+			"type": "string",
+			"description": "The address 2"
+		},
+		"city": {
+			"type": "string",
+			"description": "The address city"
+		},
+		"state": {
+			"type": "string",
+			"description": "The address state"
+		},
+		"zip": {
+			"type": "string",
+			"description": "The address zip"
+		},
+		"email": {
+			"type": "string",
+			"description": "The employees email"
+		}
+	}
+}

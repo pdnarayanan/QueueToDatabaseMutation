@@ -1,0 +1,13 @@
+CREATE TABLE employee (
+	id INTEGER PRIMARY KEY,
+	first_name VARCHAR(30) NOT NULL,
+	last_name VARCHAR(30) NOT NULL,
+	address1 VARCHAR(30) NOT NULL,
+	address2 VARCHAR(30),
+	city VARCHAR(30) NOT NULL,
+	state VARCHAR(30) NOT NULL,
+	zip VARCHAR(15) NOT NULL, 
+	email VARCHAR(30) NOT NULL
+	);
+	
+	
